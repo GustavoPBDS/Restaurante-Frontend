@@ -1,0 +1,25 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html{
+    font-size: 14px;
+}
+::-webkit-scrollbar {
+    width: .4rem;
+    height: .4rem;
+}
+
+::-webkit-scrollbar-track {
+    background:transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #0047FF;
+    border-radius: 1rem;
+}
+
+::-webkit-scrollbar-thumb:active {
+    background: #00E4FF;
+}
