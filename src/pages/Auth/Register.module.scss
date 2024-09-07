@@ -1,0 +1,154 @@
+@import '../../assets/styles/vars.scss';
+
+.container{
+    @extend %container_center_div;
+
+    .register_container{
+        display: flex;
+        background-color: map-get($map: $colors, $key: preto2);
+        border-radius: 1.9375rem;
+        box-shadow: 0px 0px 21.6px 4px rgba(0, 0, 0, 0.25);
+        padding: 1.5rem;
+        gap: 1.44rem;
+        width: 97%;
+        max-width: 40rem;
+        flex-direction: column;
+
+        .title_register{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            h1{
+                @include text_style(map-get($map: $colors, $key: branco), 3rem, 700);
+            }
+        }
+
+        form{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.2rem;
+            .fields{
+                display: flex;
+                justify-content: space-around;
+                width: 100%;
+                .inputs_area{
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1rem;
+                    width: 60%;
+                    .field{
+                        position: relative;
+                        display: flex;
+                        gap: .44rem;
+                        align-items: center;
+                        padding: 0.5625rem;
+                        border-radius: 0.6875rem;
+                        background-color: map-get($map: $colors, $key: preto);
+
+                        input{
+                            @include text_style(map-get($map: $colors, $key: branco), 1rem, 400);
+                            background-color: transparent;
+                            border: none;
+                            &:focus{
+                                outline: none;
+                            }
+                        }
+                        &:has(.message_error_input){
+                            outline: 2px solid map-get($map: $colors, $key: errorColor);
+                        }
+                        .message_error_input{
+                            position: absolute;
+                            bottom: 0;
+                            right: 0;
+                            transform: translate(0%, 100%);
+                            @include text_style(map-get($map: $colors, $key: errorColor),.9rem, 400);
+                            &::first-letter{
+                                text-transform: uppercase;
+                            }
+                        }
+                    }
+                }
+                .image_area{
+                    display: flex;
+                    align-items: center;
+
+                    input[type="file"]{
+                        @extend %hidden_element;
+                    }
+                    label{
+                        display: flex;
+                        flex-direction: column;
+                        gap: 10px;
+                        height: auto;
+                    }
+                    img{
+                        height: 100%;
+                        width: 100%;
+                        position: absolute;
+                        
+                        border-radius: 50%;
+                        background-size: contain;
+                        object-fit: cover;
+                        border: 2px solid map-get($map: $colors, $key: cinza);
+                    }
+                    span{
+                        display: inline-block;
+                        height: 170px;
+                        width: 170px;
+                        border-radius: 100%;
+                        position: relative;
+                        background-color: map-get($map: $colors, $key: cinza);
+
+                        svg{
+                            position: relative;
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+                        }
+                    }
+                    span:hover{
+                        opacity: .8;
+                    }
+                    p{
+                        @include text_style(map-get($map: $colors, $key: cinza2), .8rem, 400);
+                        text-align: center;
+                    }
+                    span:hover, p:hover{
+                        cursor: pointer;
+                    }
+                }
+            }
+            .submit_container{
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                button{
+                    width: 100%;
+                    max-width: 22rem;
+                    padding: 0.625rem;
+                    border-radius: 0.625rem;
+                    text-align: center;
+                    @include text_style(map-get($map: $colors, $key: branco), 1.25rem, 700);
+                    text-transform: uppercase;
+                    background-color: map-get($map: $colors, $key: azulEscuro);
+                    border: none;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        footer{
+            p{
+                @include text_style(map-get($map: $colors, $key: cinza3), .9rem, 400);
+                a{
+                    font-weight: 700;
+                    background: linear-gradient(map-get($map: $colors, $key: ciano) 0%, map-get($map: $colors, $key: azulEscuro) 100%);
+                    background-clip: content-box;
+                    -webkit-text-fill-color: transparent;
+                    -webkit-background-clip: text;
+                }
+            }
+        }
+    }
+}

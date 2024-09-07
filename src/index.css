@@ -1,25 +1,15 @@
 *{
-    margin: 0;
-    padding: 0;
+    margin: 0px;
+    padding: 0px;
     box-sizing: border-box;
 }
-html{
-    font-size: 14px;
+ul, ol{
+    list-style: none;
 }
-::-webkit-scrollbar {
-    width: .4rem;
-    height: .4rem;
+a{
+    text-decoration: none;
 }
-
-::-webkit-scrollbar-track {
-    background:transparent;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #0047FF;
-    border-radius: 1rem;
-}
-
-::-webkit-scrollbar-thumb:active {
-    background: #00E4FF;
+button:hover, input[type='submit']:hover, .button:hover{
+    transition: .2s ease;
+    opacity: .85;
 }

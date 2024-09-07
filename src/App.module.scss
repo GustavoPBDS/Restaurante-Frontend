@@ -1,0 +1,28 @@
+@import './assets/styles/vars.scss';
+html{
+    font-size: 15px;
+    background-image: $fundo-preto;
+    background-color: map-get($map: $colors, $key: preto);
+}
+.App{
+    height: auto;
+    min-height: 100vh;
+    width: 100%;
+}
+::-webkit-scrollbar {
+    width: .4rem;
+    height: .4rem;
+}
+
+::-webkit-scrollbar-track {
+    background:transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: map-get($map: $colors, $key: azulEscuro);
+    border-radius: 1rem;
+}
+
+::-webkit-scrollbar-thumb:active {
+    background: map-get($map: $colors, $key: ciano);
+}

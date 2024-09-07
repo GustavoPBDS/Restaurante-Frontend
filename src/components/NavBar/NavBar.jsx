@@ -4,7 +4,8 @@ import styles from './NavBar.module.scss'
 const NavBar = () => {
     return (
         <nav className={styles.navbar_container}>
-            <Link to='/home'>Home</Link>
+            <Link to='/'>Home</Link>
+            <Link to='/register'>Register</Link>
             <Link to='/contact'>Contact</Link>
         </nav>
     )
