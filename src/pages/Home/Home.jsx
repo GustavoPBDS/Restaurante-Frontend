@@ -1,10 +1,10 @@
 import styles from './Home.module.scss'
 
+import React from 'react'
+
 const Home = () => {
     return (
-        <div className={styles.Home}>
-            <h1>Home</h1>
-        </div>
+        <div>Home</div>
     )
 }
 

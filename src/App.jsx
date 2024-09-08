@@ -1,14 +1,20 @@
 import { useState, useEffect} from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, useLocation} from 'react-router-dom'
 import styles from './App.module.scss'
 
 import NavBar from './components/NavBar/NavBar'
 
-import Home from './pages/Home/Home'
+import Home from './pages/Home/LP'
 import Contact from './pages/Contact/Contact'
 import { useDispatch, useSelector } from 'react-redux'
 import Register from './pages/Auth/Register'
 import Login from './pages/Auth/Login'
+
+import Message from './components/Message/Message'
+import { useAuth } from './hooks/useAuth'
+import { useCookiesCustom } from './hooks/useCookiesCustom'
+
+import Router from './Router'
 
 function App() {
     const dispatch = useDispatch(),
@@ -18,8 +24,6 @@ function App() {
 
         {ErrorsG} = useSelector(state=>state.globalErrors)
 
-
-    
     useEffect(()=>{
         const errors = [errorAuth, ErrorsG].filter(Boolean)
         if (errors.length > 0){
@@ -30,18 +34,12 @@ function App() {
             setGlobalError(null)
         }
     },[errorAuth, ErrorsG])
-    
+
+    useAuth()
     return (
         <div className={styles.App}>
             <BrowserRouter>
-                <NavBar/>
-                <Routes>
-                    <Route path='/' element={<Home/>}/>
-                    <Route path='/register' element={<Register/>}/>
-                    <Route path='/login' element={<Login/>}/>
-                    <Route path='/contact' element={<Contact/>}/>
-                </Routes>
-                {globalError && <Message message={globalError} type='error'/>}
+                <Router globalError={globalError}/>
             </BrowserRouter>
         </div>
     )

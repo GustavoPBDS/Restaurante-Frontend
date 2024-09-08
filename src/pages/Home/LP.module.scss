@@ -1,0 +1,63 @@
+@import '../../assets/styles/vars.scss';
+
+.Home{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    align-items: center;
+
+    .header_home{
+        display: flex;
+        width: 95%;
+        align-items: center;
+        justify-content: flex-end;
+        nav ul{
+            display: flex;
+            gap: 3rem;
+            li{
+                padding: 0.46875rem 0.93306rem 0.46875rem 0.94194rem;
+                border-radius: 0.625rem;
+                background-color: map-get($map: $colors, $key: azulEscuro);
+                a{
+                    @include text_style(map-get($map: $colors, $key: branco), 1rem, 700);
+                }
+            }
+        }
+    }
+
+    .content{
+        width: 93%;
+        max-width: 50rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3rem;
+        .title_container{
+            h1{
+                @include text_style(map-get($map: $colors, $key: branco), 3.2rem, 700);
+                span{
+                    color: map-get($map: $colors, $key: azulEscuro);
+                }
+            }
+        }
+        .body_content{
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            gap: 2rem;
+            article{
+                display: flex;
+                flex-direction: column;
+                gap: 1.2rem;
+                h3{
+                    @include text_style(map-get($map: $colors, $key: branco), 1.9rem, 500);
+                }
+                p{
+                    @include text_style(map-get($map: $colors, $key: branco), 1rem, 400);
+                }
+            }
+        }
+    }
+}

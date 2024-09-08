@@ -1,0 +1,106 @@
+@import '../../assets/styles/vars.scss';
+
+.container{
+    @extend %container_center_div;
+
+    .login_container{
+        display: flex;
+        background-color: map-get($map: $colors, $key: preto2);
+        border-radius: 1.9375rem;
+        box-shadow: 0px 0px 21.6px 4px rgba(0, 0, 0, 0.25);
+        padding: 1.5rem;
+        gap: 1.44rem;
+        width: 97%;
+        max-width: 35rem;
+        flex-direction: column;
+
+        .title_login{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            h1{
+                @include text_style(map-get($map: $colors, $key: branco), 2.5rem, 700);
+            }
+        }
+
+        form{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.2rem;
+            .fields{
+                display: flex;
+                justify-content: space-around;
+                width: 100%;
+                .inputs_area{
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1.15rem;
+                    width: 85%;
+                    .field{
+                        position: relative;
+                        display: flex;
+                        gap: .44rem;
+                        align-items: center;
+                        padding: 0.5625rem;
+                        border-radius: 0.6875rem;
+                        background-color: map-get($map: $colors, $key: preto);
+
+                        input{
+                            @include text_style(map-get($map: $colors, $key: branco), 1rem, 400);
+                            background-color: transparent;
+                            border: none;
+                            width: 100%;
+                            &:focus{
+                                outline: none;
+                            }
+                        }
+                        &:has(.message_error_input){
+                            outline: 2px solid map-get($map: $colors, $key: errorColor);
+                        }
+                        .message_error_input{
+                            position: absolute;
+                            bottom: 0;
+                            right: 0;
+                            transform: translate(0%, 100%);
+                            @include text_style(map-get($map: $colors, $key: errorColor),.9rem, 400);
+                            &::first-letter{
+                                text-transform: uppercase;
+                            }
+                        }
+                    }
+                }
+            }
+            .submit_container{
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                button{
+                    width: 100%;
+                    max-width: 15rem;
+                    padding: 0.625rem;
+                    border-radius: 0.625rem;
+                    text-align: center;
+                    @include text_style(map-get($map: $colors, $key: branco), 1.25rem, 700);
+                    text-transform: uppercase;
+                    background-color: map-get($map: $colors, $key: azulEscuro);
+                    border: none;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        footer{
+            p{
+                @include text_style(map-get($map: $colors, $key: cinza3), .9rem, 400);
+                a{
+                    font-weight: 700;
+                    background: linear-gradient(map-get($map: $colors, $key: ciano) 0%, map-get($map: $colors, $key: azulEscuro) 100%);
+                    background-clip: content-box;
+                    -webkit-text-fill-color: transparent;
+                    -webkit-background-clip: text;
+                }
+            }
+        }
+    }
+}

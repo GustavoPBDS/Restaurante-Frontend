@@ -1,0 +1,159 @@
+@import '../../assets/styles/vars.scss';
+.navbar_container{
+    position: fixed;
+    height: 100vh;
+    width: 3.5rem;
+    background-color: map-get($map: $colors, $key: preto2);
+    left: 0;
+    transition: .3s ease-in;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    .actions_container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        .profile_info{
+            padding: 1rem 0;
+            width: 80%;
+            border-bottom: 2px solid gray;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: .8rem;
+            position: relative;
+    
+            .image_container{
+                width: 2.5rem;
+                height: 2.5rem;
+                border-radius: 50%;
+                transition: .3s ease-in;
+                overflow: hidden;
+                border: 2px solid map-get($map: $colors, $key: ciano);
+                img, svg{
+                    height: 100%;
+                    width: 100%;
+                    object-fit: cover;
+                }
+            }
+            h4{
+                @include text_style(map-get($map: $colors, $key: branco), 1rem, 600);
+                background: linear-gradient(map-get($map: $colors, $key: ciano) 0%, map-get($map: $colors, $key: azulEscuro) 100%);
+                background-clip: content-box;
+                -webkit-text-fill-color: transparent;
+                -webkit-background-clip: text;
+            }
+            .config_container{
+                position: absolute;
+                top: 5%;
+                right: 5%;
+                height: 1.5rem;
+                width: 1.5rem;
+                svg{
+                    width: 100%;
+                    height: 100%;
+                }
+                &.active_link{
+                    background: linear-gradient(to right, map-get($map: $colors, $key: azulEscuro), map-get($map: $colors, $key: ciano));
+                    background-clip: content-box;
+                    -webkit-text-fill-color: transparent;
+                    -webkit-background-clip: text;
+                    svg path{
+                        fill: map-get($map: $colors, $key: azulEscuro);
+                    }
+                }
+            }
+        }
+        ul{
+            margin-top: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: .6rem;
+            align-items: center;
+            li{
+                a{
+                    @include text_style(map-get($map: $colors, $key: branco), 1rem, 400);
+                    display: flex;
+                    gap: .5rem;
+                    align-items: center;    
+
+                    span{
+                        display: block;
+                        height: 2rem;
+                        width: 2rem;
+                        svg{
+                            width: 100%;
+                            height: 100%;
+                        }
+                    }
+                    .nav_text{
+                        opacity: 0;
+                        height: auto;
+                        width: auto;
+                        transition: .3s ease-in;
+                    }
+                }
+            }
+            .active_link{
+                background: linear-gradient(to right, map-get($map: $colors, $key: azulEscuro), map-get($map: $colors, $key: ciano));
+                background-clip: content-box;
+                -webkit-text-fill-color: transparent;
+                -webkit-background-clip: text;
+                svg path{
+                    fill: map-get($map: $colors, $key: azulEscuro);
+                }
+            }
+        }
+    }
+    .account_leave{
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 1rem;
+        button{
+            display: flex;
+            cursor: pointer;
+            background-color: transparent;
+            border: none;
+            &:focus{
+                outline: none;
+            }
+            span{
+                width: 2rem;
+                height: 2rem;
+                display: block;
+                svg{
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+        }
+    }
+
+
+    &.active{
+        transition: .3s ease-in;
+        width: 20rem;
+        .image_container{
+            width: 8rem !important;
+            height: 8rem !important;
+            transition: .3s ease-in;
+        }
+        .nav_text{
+            opacity: 1 !important;
+            transition: .3s ease-in !important;
+        }
+    }
+}
+@media screen and (max-width: 560px){
+    .navbar_container{
+        width: 2.5rem;
+        &.active{
+            width: 85%;
+        }
+    }
+}

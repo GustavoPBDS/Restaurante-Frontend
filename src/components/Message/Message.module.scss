@@ -20,7 +20,7 @@
         background-color: map-get($map: $colors, $key: correct);
     }
     p{
-        @include styleTexto(map-get($map: $colors, $key: branco), 1rem, 500);
+        @include text_style(map-get($map: $colors, $key: branco), 1rem, 500);
         &::first-letter{
             text-transform: capitalize;
         }

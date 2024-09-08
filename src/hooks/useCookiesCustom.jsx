@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react'
 import { useCookies } from 'react-cookie'
 
-const useCookiesCustom = (name) => {
+export const useCookiesCustom = (name) => {
     const [cookies, setCookie, removeCookie] = useCookies([name]),
         cookie = cookies[name]
 
@@ -23,5 +23,3 @@ const useCookiesCustom = (name) => {
 
     return {cookie, setToken, createCookie, deleteCookie}
 }
-
-export default useCookiesCustom

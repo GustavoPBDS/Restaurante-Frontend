@@ -6,18 +6,23 @@ import PadlockSvg from '../../components/Icons/PadlockSvg'
 import UploadImageSvg from '../../components/Icons/UploadImageSvg'
 
 import { useState, useEffect} from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import useErrors from '../../hooks/useErrors'
+import {useAuth} from '../../hooks/useAuth'
 
 const Register = () => {
-    const {dispatchGlobalError, setError, concatErrors, getError, hasErrors, inputsErrors} = useErrors()
+    const {dispatchGlobalError, setError, concatErrors, getError, hasErrors, inputsErrors} = useErrors(),
+        {registerUser} = useAuth()
 
     const [name, setName] = useState(''),
         [email, setEmail] = useState(''),
         [password, setPassword] = useState(''),
         [confirmPassword, setConfirmPassword] = useState(''),
+        [profileImgFile, setProfileImgFile] = useState(null),
 
-        [draftImage, setDraftImage] = useState('')
+        [draftImage, setDraftImage] = useState(''),
+        {sucess, loading} = useSelector(state=>state.auth),
+        navigate = useNavigate()
 
 
     useEffect(()=>{
@@ -33,13 +38,22 @@ const Register = () => {
     const handleSubmit = (e)=>{
         e.preventDefault()
 
-        if(hasErrors(inputsErrors)) return
+        if (!name) setError('name', 'O nome não pode estar vazio')
+        if (!email) setError('email', 'O email não pode estar vazio')
+        if (!password) setError('password', 'A senha não pode estar vazia')
+        if (!confirmPassword) setError('confirmPassword', 'A senha não pode estar vazia')
+
+        if(hasErrors(inputsErrors) || !name || !email || !password || !confirmPassword) return
 
         const userData = {
-            user:{
-                name, email, password
-            }
+            name, email, password
         }
+
+        const body = new FormData()
+        body.append('image', profileImgFile)
+        body.append('user', JSON.stringify(userData))
+
+        registerUser(body)
     },
     handleImage = (e)=>{
         const files = e.target.files
@@ -50,9 +64,13 @@ const Register = () => {
             dispatchGlobalError('Tipo de arquivo invalido')
             return
         }
-    
-        setDraftImage(URL.createObjectURL(e.target.files[0]))
+        setProfileImgFile(image)
+        setDraftImage(URL.createObjectURL(image))
     }
+
+    useEffect(()=>{
+        if(sucess && !loading) navigate('/home')
+    },[sucess, loading])
 
     return (
         <div className={styles.container}>

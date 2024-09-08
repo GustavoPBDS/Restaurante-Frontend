@@ -10,9 +10,31 @@ const initialState = {
 }
 
 export const register = createAsyncThunk('auth/register', 
-    async ({userObject}, TrunkAPI)=>{
+    async ({userObject, setToken}, TrunkAPI)=>{
         try {
-            const res = await authService.register(userObject)
+            const res = await authService.register(userObject, setToken)
+            return res
+        } catch (err) {
+            return TrunkAPI.rejectWithValue(err)
+        }
+    }
+)
+export const login = createAsyncThunk('auth/login', 
+    async ({userObject, setToken}, TrunkAPI)=>{
+        try {
+            const res = await authService.login(userObject, setToken)
+            return res
+        } catch (err) {
+            return TrunkAPI.rejectWithValue(err)
+        }
+    }
+)
+
+
+export const getAuthUser = createAsyncThunk('auth/authuser', 
+    async ({token}, TrunkAPI)=>{
+        try {
+            const res = await authService.getAuthUser(token)
             return res
         } catch (err) {
             return TrunkAPI.rejectWithValue(err)
@@ -43,6 +65,39 @@ export const authSlice = createSlice({
             })
             .addCase(register.fulfilled, (state, action)=>{
                 state.token = action.payload
+                state.sucess = true
+                state.error = false
+                state.loading = false
+            })
+            .addCase(login.pending, (state)=>{
+                state.loading = true
+                state.sucess = false
+                state.error = false
+            })
+            .addCase(login.rejected, (state, action)=>{
+                state.loading = false
+                state.sucess = false
+                state.error = action.payload
+            })
+            .addCase(login.fulfilled, (state, action)=>{
+                state.token = action.payload
+                state.sucess = true
+                state.error = false
+                state.loading = false
+            })
+
+            .addCase(getAuthUser.pending, (state)=>{
+                state.loading = true
+                state.sucess = false
+                state.error = false
+            })
+            .addCase(getAuthUser.rejected, (state, action)=>{
+                state.loading = false
+                state.sucess = false
+                state.error = action.payload
+            })
+            .addCase(getAuthUser.fulfilled, (state, action)=>{
+                state.user = action.payload
                 state.sucess = true
                 state.error = false
                 state.loading = false

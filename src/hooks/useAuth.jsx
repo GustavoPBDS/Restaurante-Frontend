@@ -1,18 +1,42 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useCallback} from "react"
 
-import { useDispatch } from "react-redux"
-import { reset, register} from "../slices/authSlice"
+import { useDispatch, useSelector } from "react-redux"
+import { reset, register, getAuthUser, login} from "../slices/authSlice"
+import { useCookiesCustom} from './useCookiesCustom'
 
 export const useAuth = () => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch(),
+        {cookie, setToken, deleteCookie} = useCookiesCustom('user'),
+        {user} = useSelector(state=>state.auth),
 
-    const registerUser = (userObject)=>{
-        dispatch(register({userObject}))
-    }
+        [isAuth, setIsAuth] = useState(false)
+
+    useEffect(()=>{
+        if(user) return setIsAuth(true)
+        if (!cookie) return setIsAuth(false)
+        getUserFromToken(cookie)
+    }, [user, cookie])
+
+    const registerUser = useCallback((userObject) => {
+        dispatch(register({userObject, setToken}))
+    }, [dispatch, setToken])
+    
+    const loginUser = useCallback((userObject) => {
+        dispatch(login({userObject, setToken}))
+    }, [dispatch, setToken])
+    
+    const getUserFromToken = useCallback((token) => {
+        dispatch(getAuthUser({token}))
+    }, [dispatch])
+
+    const logout = useCallback(()=>{
+        deleteCookie('user')
+    }, [deleteCookie])
+    
 
     useEffect(()=>{
         dispatch(reset())
     },[dispatch])
 
-    return {registerUser}
+    return {registerUser, loginUser, isAuth, logout}
 }
