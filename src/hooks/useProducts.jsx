@@ -14,7 +14,23 @@ export const useProducts = () => {
             dispatchGlobalError(err.message)
         }
     }, [])
+    const AllProducts = useCallback(async()=>{
+        try {
+            const Products = await productsService.Products()
+            return Products
+        } catch (err) {
+            dispatchGlobalError(err.message)
+        }
+    }, [])
+    const searchResult = useCallback(async(name, categories)=>{
+        try {
+            const Products = await productsService.Search(name, categories)
+            return Products
+        } catch (err) {
+            dispatchGlobalError(err.message)
+        }
+    }, [])
 
 
-    return {getProductsCategories}
+    return {getProductsCategories, searchResult, AllProducts}
 }

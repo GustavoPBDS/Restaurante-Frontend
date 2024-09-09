@@ -1,0 +1,9 @@
+@import '../../assets/styles/vars.scss';
+
+.container{
+    @extend %container-default;
+
+    .content{
+        
+    }
+}

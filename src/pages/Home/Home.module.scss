@@ -2,16 +2,6 @@
 
 .container{
     @extend %container-default;
-    header{
-        width: 95%;
-        display: flex;
-        justify-content: flex-end;
-        padding: 1rem;
-        .search_container{
-            width: 100%;
-            max-width: 30rem;
-        }
-    }
     .content{
         display: flex;
         flex-direction: column;

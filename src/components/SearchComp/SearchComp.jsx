@@ -3,23 +3,45 @@ import styles from './SearchComp.module.scss'
 import SearchSvgNav from '../Icons/NavbarIcons/SearchSvgNav'
 import Send from '../Icons/Send'
 import FiltersSvg from '../Icons/FiltersSvg'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Filters from './Filters'
+import { useSelector } from 'react-redux'
 
 const SearchComp = () => {
     const [search, setSearch] = useState(''),
-        [filterClicked, setFilterClicked] = useState(false)
+        [filterClicked, setFilterClicked] = useState(false),
+        [categories, setCategories] = useState(null),
+        [name, setName] = useState(''),
+        {filters} = useSelector(state=>state.filters)
     
     const navigate = useNavigate()
     
     const handleSubmit = (e)=>{
         e.preventDefault()
 
-        // navigate('/search')
+        if (!search) navigate('/search')
+        if (filters) setCategories(filters.join(','))   
+        setName(search)
     },
     handleFilterClick = ()=>{
         setFilterClicked(!filterClicked)
     }
+
+    useEffect(()=>{
+        let urlExplore = '/search?',
+            paramsObject = {}
+
+        if (name) paramsObject.name = name
+        if (categories) paramsObject.categories = categories
+
+        const params = new URLSearchParams(paramsObject)
+
+        if (!params.toString()) return
+
+        urlExplore += params.toString()
+        navigate(urlExplore)
+    },[name, categories])
+
     return (
         <div className={styles.searching_container}>
             <div className={styles.filter}>

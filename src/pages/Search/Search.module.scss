@@ -1,0 +1,21 @@
+@import '../../assets/styles/vars.scss';
+
+.container{
+    @extend %container-default;
+    .content{
+        display: flex;
+        flex-direction: column;
+        gap: 2.5rem;
+        margin-left: 5rem;
+        padding-bottom: 1rem;
+        h2{
+            @include text_style(map-get($map: $colors, $key: branco), 2rem, 700);
+        }
+        section{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+
+        }
+    }
+}

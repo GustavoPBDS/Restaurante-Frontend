@@ -37,4 +37,14 @@ export const authService = new class{
             throw err.response.data
         }
     }
+    async sendmail(body, token){
+        const url = 'send-email',
+            config = makeAxiosConfig('POST', url, token, body)
+        try {
+            const res = await axios(config)
+            return res.data.sucess
+        } catch (err) {
+            throw err.response.data
+        }
+    }
 }

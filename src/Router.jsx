@@ -10,6 +10,8 @@ import Home from "./pages/Home/Home";
 import Message from "./components/Message/Message";
 import Loading from "./pages/Loading/Loading";
 import { useCookiesCustom } from "./hooks/useCookiesCustom";
+import Search from "./pages/Search/Search";
+import Product from "./pages/Product/Product";
 
 const Router = ({ globalError }) => {
     const location = useLocation(),
@@ -23,15 +25,15 @@ const Router = ({ globalError }) => {
         <>
             {!shouldHideNavbar && <header><NavBar /></header>}
             <Routes>
-                <Route path='/' element={<LP />}/>
+                <Route path='/' element={user ? <Home/> : <LP/>}/>
 
                 <Route path="/home" element={user ? <Home/> : <LP/>}/>
-                <Route path="/search" element={user ? <Home/> : <LP/>}/>
+                <Route path="/search" element={user ? <Search/> : <LP/>}/>
                 <Route path="/orders" element={user ? <Home/> : <LP/>}/>
                 <Route path="/users" element={user ? <Home/> : <LP/>}/>
 
                 <Route path="/products/:category" element={user ? <Home/> : <LP/>}/>
-                <Route path="/product/:pid" element={user ? <Home/> : <LP/>}/>
+                <Route path="/product/:pid" element={user ? <Product/> : <LP/>}/>
 
                 <Route path='/register' element={<Register/>} />
                 <Route path='/login' element={<Login/>}/>

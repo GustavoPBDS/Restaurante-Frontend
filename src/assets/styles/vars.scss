@@ -45,6 +45,17 @@ $fundo-preto:url(./assets/fundoPreto.png);
         margin-left: 2.5rem;
         width: calc(100% - 2.5rem);
     }
+
+    header{
+        width: 95%;
+        display: flex;
+        justify-content: flex-end;
+        padding: 1rem;
+        .search_container{
+            width: 100%;
+            max-width: 30rem;
+        }
+    }
 }
 
 @mixin text_style($color, $sizeEM, $FWeight){
