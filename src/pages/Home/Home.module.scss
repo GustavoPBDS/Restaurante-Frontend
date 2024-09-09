@@ -1,1 +1,57 @@
 @import '../../assets/styles/vars.scss';
+
+.container{
+    @extend %container-default;
+    header{
+        width: 95%;
+        display: flex;
+        justify-content: flex-end;
+        padding: 1rem;
+        .search_container{
+            width: 100%;
+            max-width: 30rem;
+        }
+    }
+    .content{
+        display: flex;
+        flex-direction: column;
+        gap: 2.5rem;
+        margin-left: 5rem;
+        padding-bottom: 1rem;
+        h2{
+            @include text_style(map-get($map: $colors, $key: branco), 2rem, 700);
+        }
+        .categories_container{
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+
+            article{
+                display: flex;
+                flex-direction: column;
+                gap: .5rem;
+                .category_link{
+                    a{
+                        @include text_style(map-get($map: $colors, $key: branco), 1.5rem, 500);
+                        text-transform: capitalize;
+                    }
+                }
+                .products_container{
+                    display: flex;
+                    gap: 1.5rem;
+                    align-items: center;
+                    flex-wrap: wrap;
+                    .see_more{
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;
+                        p{
+                            @include text_style(map-get($map: $colors, $key: branco), 1rem, 400);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

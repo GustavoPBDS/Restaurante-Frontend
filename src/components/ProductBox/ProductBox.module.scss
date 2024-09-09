@@ -1,0 +1,129 @@
+@import '../../assets/styles/vars.scss';
+
+
+.product_container{
+    width: 20rem;
+    min-height: 20rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border-radius: 0.9375rem;
+    gap: 1.75rem;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.20);
+    background-color: map-get($map: $colors, $key: preto2);
+    overflow: hidden;
+    .title_area{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.625rem;
+        padding: 1.125rem 1rem 0 1rem;
+        h3{
+            @include text_style( map-get($map: $colors, $key: branco), 1.25rem, 700);
+        }
+        p{
+            @include text_style( map-get($map: $colors, $key: cinza4), 1rem, 400);
+        }
+    }
+    .container_transition_hover{
+        transition: .2s linear;
+        position: relative;
+        height: 15rem;
+        width: 100%;
+        padding: 1.12rem 0.8125rem;
+        .img_container{
+            width: 100%;
+            height: 100%;
+            position: relative;
+            border-radius: 0.9375rem 0.9375rem 0rem 0.9375rem;
+            overflow: hidden;
+            img{
+                height: 100%;
+                width: 100%;
+                background-size: contain;
+                object-fit: cover;
+            }
+            .footerImg{
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                display: flex;
+                flex-direction: column;
+                z-index: 2;
+                transition: .2s linear;
+                svg{
+                    width: .8rem;
+                    height: .8rem;
+                }
+                div{
+                    display: flex;
+                    gap: .2rem;
+                    align-items: center;
+                    align-self: flex-end;
+                    border-radius: 0.6875rem 0rem 0rem 0rem;
+                    padding: .65rem;
+                    background-color: map-get($map: $colors, $key: preto2);
+                    @include text_style(map-get($map: $colors, $key: branco), .75rem, 700);
+                    .container_span{
+                        background-color: map-get($map: $colors, $key: preto2);
+                        span{
+                            -webkit-text-fill-color: transparent;
+                            background: linear-gradient(90deg, #0047FF 0%, #00E4FF 100%);
+                            background-clip: text;
+                            text-transform: uppercase;
+                        }
+                    }
+                }
+            }
+        }
+        .gradient_container{
+            transition: .2s linear;
+            transition-delay: 1s !important;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            display: none;
+            top: 0;
+            left: 0;
+
+            a{
+                display: block;
+                cursor: pointer;
+                text-align: center;
+                border: none;
+                width: 13rem;
+                text-transform: uppercase;
+                @include text_style(map-get($map: $colors, $key: ciano), 1rem, 700);
+                background-color: map-get($map: $colors, $key: preto);
+                padding: .62rem .5rem;
+                border-radius: 0.3125rem;
+                &:hover{
+                    opacity: .95;
+                }
+            }
+        }
+    }
+    &:hover{
+        transition: .2s linear;
+        .container_transition_hover{
+            padding: 0;
+            .img_container{
+                border: none;
+                border-radius: 0;
+                transition: .2s linear;
+                .footerImg{
+                    transition: .2s linear;
+                    display: none;
+                }
+            }
+            .gradient_container{
+                transition: .2s linear;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 2;
+                background: linear-gradient(180deg, map-get($map: $colors, $key: preto2) 26%, transparent 100%);
+            }
+        }
+    }
+}

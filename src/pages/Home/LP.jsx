@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom'
 const LP = () => {
     const {token} = useSelector(state=>state.auth),
         navigate = useNavigate()
-
+    console.log('ue')
     return (
         <div className={styles.Home}>
             <header className={styles.header_home}>

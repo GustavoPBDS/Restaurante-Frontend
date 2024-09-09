@@ -20,7 +20,6 @@ const NavBar = () => {
         navigate = useNavigate()
 
     const handleLeave = (e)=>{
-        e.preventDefault()
         logout()
         navigate('/')
     }

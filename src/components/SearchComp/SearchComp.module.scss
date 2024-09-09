@@ -1,0 +1,93 @@
+@import '../../assets/styles/vars.scss';
+
+.searching_container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    .filter_popup_container{
+        width: 100%;
+        position: relative;
+    }
+    .filter{
+        .filter_button{
+            display: flex;
+            gap: .2rem;
+            align-items: center;
+            background-color: map-get($map: $colors, $key: azulEscuro   );
+            padding: .4rem .8rem;
+            border-radius: 11px;
+            user-select: none;
+            cursor: pointer;
+            span{
+                width: 1.4rem;
+                height: 1.4rem;
+                display: block;
+                svg{
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+            p{
+                @include text_style(map-get($map: $colors, $key: branco), 1rem, 400);
+            }
+            &:hover{
+                opacity: .7;
+            }
+        }
+
+    }
+    .search{
+        .field{
+            display: flex;
+            width: 19rem;
+            padding: .2rem .6rem;
+            align-items: center;
+            gap: 7px; 
+            border-radius: 11px;
+
+            background-color: map-get($map: $colors, $key: cinzaSearch);
+
+            svg{
+                width: 2rem;
+                height: 2rem;
+            }
+            button{
+                display: flex;
+                align-items: center;
+                background-color: transparent;
+                border: none;
+                width: 1.8rem;
+                height: 1.8rem;
+                cursor: pointer;
+                &:focus{
+                    outline: none;
+                }
+            }
+            input{
+                background-color: transparent;
+                @include text_style(map-get($map: $colors, $key: branco), .8rem, 500);
+                width: 100%;
+                border: none;
+                &::-webkit-search-cancel-button{
+                    -webkit-appearance: none;
+                }
+                &:focus{
+                    outline: none;
+                }
+            }
+        }
+    }
+
+
+
+    .overlay_filter{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 5;
+        background-color: transparent;
+    }
+}

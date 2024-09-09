@@ -1,0 +1,64 @@
+@import '../../assets/styles/vars.scss';
+
+.filters_popup{
+    position: absolute;
+    z-index: 7;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
+
+    margin-top: 1rem;
+
+    .filters_container{
+        border-radius: .625rem;
+        box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.30);
+        background-color: map-get($map: $colors, $key: preto2);
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.30rem;
+
+        .quiz_types, .categories{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: .8rem;
+            p{
+                @include text_style(map-get($map: $colors, $key: branco), 1rem, 700)
+            }
+            ul{
+                display: flex;
+                gap: .62rem;
+                flex-wrap: wrap;
+                li{
+                    display: flex;
+                    justify-content: center;
+                    @include text_style(map-get($map: $colors, $key: branco), .80rem, 600);
+                    background-color: transparent;
+                    min-width: 5rem;
+                    padding: .625rem .8rem;
+                    border: 1px solid map-get($map: $colors, $key: branco);
+                    border-radius: 3rem;
+                    user-select: none;
+                    cursor: pointer;
+                }
+                .active_li{
+                    background-color: map-get($map: $colors, $key: azulEscuro);
+                    color: map-get($map: $colors, $key: branco) !important;
+                    border: none;
+                }
+            }
+        }
+    }
+
+    .apply_filters{
+       @include text_style(map-get($map: $colors, $key: branco), .80rem, 700);
+       padding: .6rem;
+       border: none;
+       border-radius: 0.625rem;
+       background-color: map-get($map: $colors, $key: azulEscuro);
+       cursor: pointer;
+    }
+}

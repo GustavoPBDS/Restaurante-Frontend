@@ -8,13 +8,17 @@ import Login from "./pages/Auth/Login";
 import Contact from "./pages/Contact/Contact";
 import Home from "./pages/Home/Home";
 import Message from "./components/Message/Message";
+import Loading from "./pages/Loading/Loading";
+import { useCookiesCustom } from "./hooks/useCookiesCustom";
 
 const Router = ({ globalError }) => {
     const location = useLocation(),
         urlsWithNoNavbar = ['/login', '/register', '/'],
         shouldHideNavbar = urlsWithNoNavbar.includes(location.pathname),
-        {user} = useSelector(state=>state.auth)
+        {user} = useSelector(state=>state.auth),
+        {cookie} = useCookiesCustom('user')
 
+    if(!user && cookie) return <Loading/>
     return (
         <>
             {!shouldHideNavbar && <header><NavBar /></header>}
@@ -25,6 +29,9 @@ const Router = ({ globalError }) => {
                 <Route path="/search" element={user ? <Home/> : <LP/>}/>
                 <Route path="/orders" element={user ? <Home/> : <LP/>}/>
                 <Route path="/users" element={user ? <Home/> : <LP/>}/>
+
+                <Route path="/products/:category" element={user ? <Home/> : <LP/>}/>
+                <Route path="/product/:pid" element={user ? <Home/> : <LP/>}/>
 
                 <Route path='/register' element={<Register/>} />
                 <Route path='/login' element={<Login/>}/>
