@@ -11,6 +11,7 @@ import SearchSvgNav from '../Icons/NavbarIcons/SearchSvgNav'
 import ConfigSvg from '../Icons/NavbarIcons/ConfigSvg'
 import { useAuth } from '../../hooks/useAuth'
 import ContactSvg from '../Icons/NavbarIcons/ContactSvg'
+import ProductSvg from '../Icons/NavbarIcons/ProductSvg'
 
 const NavBar = () => {
     const [mouseIn, setMouseIn] = useState(false),
@@ -32,8 +33,8 @@ const NavBar = () => {
                 <div className={styles.profile_info}>
                     <Link to={`/user/${user?.uid}`} className={styles.image_container}>
                         {user?.profileImg && user?.profileImg !== 'default' && imageExist
-                        ? <img src={user.profileImg} alt="Foto de perfil" onError={()=>setImageExist(false)}/> 
-                        : <DefaultProfileImg/>}
+                            ? <img src={user.profileImg} alt="Foto de perfil" onError={()=>setImageExist(false)}/> 
+                            : <DefaultProfileImg/>}
                     </Link>
                     {mouseIn && <h4>{user?.name}</h4>}
                     {mouseIn && <NavLink to='/config' className={({isActive})=>isActive ? `${styles.active_link} ${styles.config_container}` : styles.config_container}>
@@ -65,12 +66,23 @@ const NavBar = () => {
                             {mouseIn && <span className={styles.nav_text}>Contato</span>}
                         </NavLink>
                     </li>
-                    {user?.admin ? (<li>
-                        <NavLink to='/users' className={({isActive})=>isActive ? styles.active_link : ''}>
-                            <span><UsersSvg/></span>
-                            {mouseIn && <span className={styles.nav_text}>Usuarios</span>}
-                        </NavLink>
-                    </li>) : <></>}
+                    {user?.admin ? (<>
+                        
+                        <li>
+                            <NavLink to='/users' className={({isActive})=>isActive ? styles.active_link : ''}>
+                                <span><UsersSvg/></span>
+                                {mouseIn && <span className={styles.nav_text}>Usuarios</span>}
+                            </NavLink>
+                        </li>
+
+                        <li>
+                            <NavLink to='/product/create' className={({isActive})=>isActive ? styles.active_link : ''}>
+                                <span><ProductSvg/></span>
+                                {mouseIn && <span className={styles.nav_text}>Criar Produto</span>}
+                            </NavLink>
+                        </li>
+
+                    </>) : <></>}
                 </ul>
             </div>
             <div className={styles.account_leave}>

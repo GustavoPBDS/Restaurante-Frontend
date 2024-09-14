@@ -64,7 +64,7 @@ const Login = () => {
                         </div>
                     </div>
                     <div className={styles.submit_container}>
-                        <button>Entrar</button>
+                        <button disabled={loading}>{loading ? 'Carregando' : 'Entrar'}</button>
                     </div>
                 </form>
                 <footer>

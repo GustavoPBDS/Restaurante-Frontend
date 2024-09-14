@@ -41,6 +41,26 @@ export const getAuthUser = createAsyncThunk('auth/authuser',
         }
     }
 )
+export const editUser = createAsyncThunk('auth/update', 
+    async ({uid=null, token, body, setToken}, TrunkAPI)=>{
+        try {
+            const res = await authService.updateUser(body, token, uid, setToken)
+            return res
+        } catch (err) {
+            return TrunkAPI.rejectWithValue(err)
+        }
+    }
+)
+export const removeUser = createAsyncThunk('auth/delete', 
+    async ({uid=null, token}, TrunkAPI)=>{
+        try {
+            const res = await authService.deleteUser(token, uid)
+            return res
+        } catch (err) {
+            return TrunkAPI.rejectWithValue(err)
+        }
+    }
+)
 
 export const authSlice = createSlice({
     name: 'auth', initialState,
@@ -49,6 +69,10 @@ export const authSlice = createSlice({
             state.error = false
             state.sucess = false
             state.loading = false
+        },
+        resetUser:(state)=>{
+            state.user = null
+            state.token = null
         }
     },
     extraReducers: ( builder )=>{
@@ -102,8 +126,42 @@ export const authSlice = createSlice({
                 state.error = false
                 state.loading = false
             })
+
+            .addCase(editUser.pending, (state)=>{
+                state.loading = true
+                state.sucess = false
+                state.error = false
+            })
+            .addCase(editUser.rejected, (state, action)=>{
+                state.loading = false
+                state.sucess = false
+                state.error = action.payload
+            })
+            .addCase(editUser.fulfilled, (state, action)=>{
+                state.token = action.payload
+                state.sucess = true
+                state.error = false
+                state.loading = false
+            })
+            .addCase(removeUser.pending, (state)=>{
+                state.loading = true
+                state.sucess = false
+                state.error = false
+            })
+            .addCase(removeUser.rejected, (state, action)=>{
+                state.loading = false
+                state.sucess = false
+                state.error = action.payload
+            })
+            .addCase(removeUser.fulfilled, (state)=>{
+                state.user = null
+                state.token = null
+                state.sucess = true
+                state.error = false
+                state.loading = false
+            })
     }
 })
 
-export const {reset} = authSlice.actions
+export const {reset, resetUser} = authSlice.actions
 export default authSlice.reducer

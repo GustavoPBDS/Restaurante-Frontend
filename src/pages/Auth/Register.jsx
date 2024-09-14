@@ -9,6 +9,7 @@ import { useState, useEffect} from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import useErrors from '../../hooks/useErrors'
 import {useAuth} from '../../hooks/useAuth'
+import { useSelector } from 'react-redux'
 
 const Register = () => {
     const {dispatchGlobalError, setError, concatErrors, getError, hasErrors, inputsErrors} = useErrors(),
@@ -122,7 +123,7 @@ const Register = () => {
                         </div>
                     </div>
                     <div className={styles.submit_container}>
-                        <button>Cadastrar</button>
+                    <button disabled={loading}>{loading ? 'Carregando' : 'Cadastrar'}</button>
                     </div>
                 </form>
                 <footer>

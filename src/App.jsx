@@ -35,7 +35,6 @@ function App() {
         }
     },[errorAuth, ErrorsG])
 
-    useAuth()
     return (
         <div className={styles.App}>
             <BrowserRouter>

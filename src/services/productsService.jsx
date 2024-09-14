@@ -13,6 +13,18 @@ export const productsService = new class{
             throw err.response.data
         }
     }
+    async ProductsCategory(category){
+        const url = `products/${category}`,
+            config = makeAxiosConfig('GET', url)
+        
+        try {
+            const res = await axios(config)
+            return res.data.products
+        } catch (err) {
+            throw err.response.data
+        }
+    }
+
     async Products(){
         const url = `products`,
             config = makeAxiosConfig('GET', url)
@@ -20,6 +32,17 @@ export const productsService = new class{
         try {
             const res = await axios(config)
             return res.data.products
+        } catch (err) {
+            throw err.response.data
+        }
+    }
+    async Product(pid){
+        const url = `product/${pid}`,
+            config = makeAxiosConfig('GET', url)
+        
+        try {
+            const res = await axios(config)
+            return res.data.product
         } catch (err) {
             throw err.response.data
         }

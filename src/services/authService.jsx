@@ -37,6 +37,37 @@ export const authService = new class{
             throw err.response.data
         }
     }
+    async getUser(uid){
+        const url = `user/${uid}`,
+            config = makeAxiosConfig('GET', url)
+        try {
+            const res = await axios(config)
+            return res.data.user
+        } catch (err) {
+            throw err.response.data
+        }
+    }
+    async updateUser(body, token, uid, setToken){
+        const url = !uid ? `user` : `user/${uid}`,
+            config = makeAxiosConfig('PUT', url, token, body)
+        try {
+            const res = await axios(config)
+            setToken(res.data.token)
+            return res.data.token
+        } catch (err) {
+            throw err.response.data
+        }
+    }
+    async deleteUser(token, uid){
+        const url = !uid ? `user` : `user/${uid}`,
+            config = makeAxiosConfig('DELETE', url, token)
+        try {
+            const res = await axios(config)
+            return res.data
+        } catch (err) {
+            throw err.response.data
+        }
+    }
     async sendmail(body, token){
         const url = 'send-email',
             config = makeAxiosConfig('POST', url, token, body)

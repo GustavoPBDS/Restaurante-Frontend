@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback} from "react"
 
 import { useDispatch, useSelector } from "react-redux"
-import { reset, register, getAuthUser, login} from "../slices/authSlice"
+import { reset, register, getAuthUser, login, resetUser, removeUser, editUser} from "../slices/authSlice"
 import { useCookiesCustom} from './useCookiesCustom'
 import useErrors from "./useErrors"
 import { authService } from "../services/authService"
@@ -34,11 +34,29 @@ export const useAuth = () => {
 
     const logout = useCallback(()=>{
         deleteCookie('user')
+        dispatch(resetUser())
     }, [deleteCookie])
+
+
+    const updateUser = useCallback(async(body, token, uid=null)=>{
+        dispatch(editUser({body, token, uid, setToken}))
+    }, [dispatch])
+    const deleteUser = useCallback(async(token, uid=null)=>{
+        dispatch(removeUser({token, uid}))
+    }, [dispatch])
+
 
     const sendEmail = useCallback(async(body, token)=>{
         try {
             return await authService.sendmail(body, token)
+        } catch (err) {
+            dispatchGlobalError(err.message)
+        }
+    }, [deleteCookie])
+
+    const getUser = useCallback(async(uid)=>{
+        try {
+            return await authService.getUser(uid)
         } catch (err) {
             dispatchGlobalError(err.message)
         }
@@ -49,5 +67,5 @@ export const useAuth = () => {
         dispatch(reset())
     },[dispatch])
 
-    return {registerUser, loginUser, isAuth, logout, sendEmail}
+    return {registerUser, loginUser, isAuth, logout, sendEmail, getUser, updateUser, deleteUser}
 }
