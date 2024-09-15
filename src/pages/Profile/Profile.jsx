@@ -26,7 +26,7 @@ const Profile = () => {
 
                 <div className={styles.image_container}>
                     <div className={styles.image}>
-                        {user?.profileImg && user?.profileImg !== 'default' && imageExist
+                        {user?.profileImg && (user?.profileImg !== 'default' || user?.profileImg !== 'admin') && imageExist
                             ? <img src={user.profileImg} alt="Foto de perfil" onError={()=>setImageExist(false)}/> 
                             : <DefaultProfileImg/>}
                         

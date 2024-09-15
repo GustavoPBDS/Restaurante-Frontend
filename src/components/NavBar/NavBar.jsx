@@ -32,7 +32,7 @@ const NavBar = () => {
             <div className={styles.actions_container}>
                 <div className={styles.profile_info}>
                     <Link to={`/user/${user?.uid}`} className={styles.image_container}>
-                        {user?.profileImg && user?.profileImg !== 'default' && imageExist
+                        {user?.profileImg && (user?.profileImg !== 'default' || user?.profileImg !== 'admin') && imageExist
                             ? <img src={user.profileImg} alt="Foto de perfil" onError={()=>setImageExist(false)}/> 
                             : <DefaultProfileImg/>}
                     </Link>

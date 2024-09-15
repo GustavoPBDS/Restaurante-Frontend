@@ -6,9 +6,12 @@ import { Link } from 'react-router-dom'
 import { useProducts } from '../../hooks/useProducts'
 import { useSelector } from 'react-redux'
 import StarSvg from '../../components/Icons/StarSvg'
+import CloseSvg from '../../components/Icons/CloseSvg'
+import CommentsProduct from '../../components/Comment/CommentsProduct'
 
 const Product = () => {
-    const [product, setProduct] = useState(null)
+    const [product, setProduct] = useState(null),
+        [seeComments, setSeeComments] = useState(false)
 
     
     const {pid} = useParams(),
@@ -60,7 +63,7 @@ const Product = () => {
 
                     <div className={styles.product_actions}>
                         <div className={styles.comment_button}>
-                            <button>Ver Comentarios</button>
+                            <button onClick={()=>setSeeComments(!seeComments)}>Ver Comentarios</button>
                         </div>
                         <div className={styles.buttons}>
                             <div className={styles.button_pay}>
@@ -72,6 +75,15 @@ const Product = () => {
                     
 
                 </article>
+
+                {seeComments && 
+                    <article className={styles.comments_article}>
+                        <CommentsProduct 
+                            setSeeComments={setSeeComments}
+                            pid={pid}
+                        />
+                    </article>
+                }
             </section>
         </div>
     )
