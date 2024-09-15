@@ -1,13 +1,17 @@
 import styles from './Product.module.scss'
 
 import {useEffect, useState} from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { useProducts } from '../../hooks/useProducts'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import StarSvg from '../../components/Icons/StarSvg'
 import CloseSvg from '../../components/Icons/CloseSvg'
 import CommentsProduct from '../../components/Comment/CommentsProduct'
+import {useOrders} from '../../hooks/useOrders'
+import {useItens} from '../../hooks/useItens'
+import { useCookiesCustom } from '../../hooks/useCookiesCustom'
+import { reset } from '../../slices/itemSlice'
 
 const Product = () => {
     const [product, setProduct] = useState(null),
@@ -16,12 +20,29 @@ const Product = () => {
     
     const {pid} = useParams(),
         {getProduct} = useProducts(),
-        {user} = useSelector(state=>state.auth)
+        {user} = useSelector(state=>state.auth),
+        {Order} = useSelector(state=>state.item),
+        {cookie:token} = useCookiesCustom('user'),
+        {createOrder} = useOrders(),
+        {SetProductInOrder} = useItens(),
+        dispatch = useDispatch(),
+        navigate = useNavigate()
+        
 
 
     const handlePay = (e)=>{
         e.preventDefault()
 
+        if (!Order){
+            createOrder(token, {orderBody:{amount:1, pid}}).then((res)=>{
+                navigate(`/orders`)
+            })
+        }else{
+            SetProductInOrder(token, Order, pid, 1).then((res)=>{
+                navigate(`/order/${res.oid}`)
+                dispatch(reset())
+            })
+        }
     }
     
     useEffect(()=>{
@@ -36,10 +57,10 @@ const Product = () => {
                     <nav>
                         <Link className={styles.home_link} to='/home'>Home</Link>
                         <div className={styles.admin_buttons}>
-                            {(user?.admin || true) && <>
+                            {(user?.admin) ? <>
                                 <Link>Editar</Link>
                                 <button>Apagar</button>
-                            </>}
+                            </> : <></>}
                         </div>
                     </nav>
                     <div className={styles.product_image}>

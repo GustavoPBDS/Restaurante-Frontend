@@ -1,0 +1,67 @@
+@import '../../assets/styles/vars.scss';
+
+.item_container{
+    background-color: map-get($map: $colors, $key: preto2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .7rem 1.2rem;
+    border-radius: .5rem;
+    width: 100%;
+    .image_container{
+        width: 9rem;
+        height: 9rem;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 2px solid map-get($map: $colors, $key: cinza);
+        img{
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+    }
+    .text{
+        @include text_style(map-get($map: $colors, $key: branco), 1.3rem, 500);
+    }
+    .save button, .remove button{
+        @include text_style(map-get($map: $colors, $key: branco), 1.1rem, 400);
+        padding: .5rem 1rem;
+        border-radius: .8rem;
+        border: none;
+        cursor: pointer;
+    }
+    .save button{
+        background-color: map-get($map: $colors, $key: correct);
+    }
+    .remove button{
+        background-color: map-get($map: $colors, $key: incorrect);
+    }
+    .amount_container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: .4rem;
+        .amount{
+            background-color: map-get($map: $colors, $key: branco);
+            width: 2rem;
+            border-radius: .4rem;
+            text-align: center;
+            p{
+                @include text_style(map-get($map: $colors, $key: preto), 1.1rem, 400);
+            }
+        }
+        span{
+            cursor: pointer;
+            user-select: none;
+            @include text_style(map-get($map: $colors, $key: preto), 1rem, 600);
+            width: 1rem;
+            height: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            background-color: map-get($map: $colors, $key: cinza);
+        }
+
+    }
+}

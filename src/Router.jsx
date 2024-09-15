@@ -16,6 +16,8 @@ import Product from "./pages/Product/Product";
 import { useAuth } from "./hooks/useAuth";
 import Profile from "./pages/Profile/Profile";
 import Config from "./pages/Profile/Config";
+import Order from "./pages/Orders/Order";
+import Orders from "./pages/Orders/Orders";
 
 const Router = ({ globalError }) => {
     const location = useLocation(),
@@ -35,7 +37,9 @@ const Router = ({ globalError }) => {
                 <Route path="/home" element={isAuth ? <Home/> : <LP/>}/>
                 <Route path="/search" element={isAuth ? <Search/> : <LP/>}/>
                 
-                <Route path="/orders" element={isAuth ? <Home/> : <LP/>}/>
+                <Route path="/orders" element={isAuth ? <Orders/> : <LP/>}/>
+                <Route path="/order/:oid" element={isAuth ? <Order/> : <LP/>}/>
+
                 <Route path="/users" element={isAuth ? <Home/> : <LP/>}/>
 
                 <Route path="/products/:category" element={isAuth ? <ProductsCategory/> : <LP/>}/>
