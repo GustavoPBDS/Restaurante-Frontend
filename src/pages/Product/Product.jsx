@@ -12,6 +12,7 @@ import {useOrders} from '../../hooks/useOrders'
 import {useItens} from '../../hooks/useItens'
 import { useCookiesCustom } from '../../hooks/useCookiesCustom'
 import { reset } from '../../slices/itemSlice'
+import { useAdmin } from '../../hooks/useAdmin'
 
 const Product = () => {
     const [product, setProduct] = useState(null),
@@ -24,6 +25,7 @@ const Product = () => {
         {Order} = useSelector(state=>state.item),
         {cookie:token} = useCookiesCustom('user'),
         {createOrder} = useOrders(),
+        {removeProduct} = useAdmin(),
         {SetProductInOrder} = useItens(),
         dispatch = useDispatch(),
         navigate = useNavigate()
@@ -58,8 +60,10 @@ const Product = () => {
                         <Link className={styles.home_link} to='/home'>Home</Link>
                         <div className={styles.admin_buttons}>
                             {(user?.admin) ? <>
-                                <Link>Editar</Link>
-                                <button>Apagar</button>
+                                <Link to={`/product/create/${pid}`}>Editar</Link>
+                                <button onDoubleClick={()=>{
+                                    removeProduct(token, pid).then(res=>{navigate('/home')})
+                                }} >Apagar</button>
                             </> : <></>}
                         </div>
                     </nav>

@@ -1,0 +1,132 @@
+@import '../../assets/styles/vars.scss';
+
+.container{
+    @extend %container-default;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    .content{
+        width: 97%; 
+        max-width: 50rem;
+        display: flex;
+        flex-direction: column;
+        padding: 2rem 0 ;
+        gap: 1.5rem;
+        h3{
+            @include text_style(map-get($map: $colors, $key: branco), 2rem, 700);
+        }
+
+        form{
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+            .image_container{
+                position: relative;
+                height: 23rem;
+                width: 100%;
+                border-radius: 0.3125rem;
+                border: 1px solid map-get($map: $colors, $key: cinzaDescD);
+                input[type="file"]{
+                    @extend %hidden_element;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                }
+                label[for="imageProduct"]{
+                    display: inline-block;
+                    height: 100%;
+                    width: 100%;
+                    border-radius: 0.3125rem;
+                    background-color: map-get($map: $colors, $key: preto2);
+                    cursor: pointer;
+                    
+                    span{
+                        display: inline-block;
+                        height: 100%;
+                        width: 100%;
+                        border-radius: 0.3125rem;
+                        position: relative;
+                        svg{
+                            position: absolute;
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+                            width: 4.72813rem;
+                            height: 4.47838rem;
+                        }
+                        img{
+                            height: 100%;
+                            width: 100%;
+                            position: absolute;
+                            
+                            border-radius: 0.3125rem;
+                            background-size: contain;
+                            object-fit: cover;
+                            border: 2px solid map-get($map: $colors, $key: cinza);
+                        }
+                    }
+    
+                }
+            }
+
+            .field{
+                display: flex;
+                flex-direction: column;
+                gap:.20rem;
+                width: 100%;
+                height: auto;
+                label {
+                    @include text_style(map-get($map: $colors, $key: branco), 1rem, 400);
+                }
+                input, textarea, select{
+                    @include text_style(map-get($map: $colors, $key: branco), .75rem, 400);
+                    background-color: map-get($map: $colors, $key:preto2 );
+                }
+                input{
+                    padding: .5rem;
+                    border-radius: 0.3125rem;
+                    border: 1px solid map-get($map: $colors, $key: cinzaDescD);
+                }
+                textarea{
+                    padding: .5rem;
+                    border-radius: 0.3125rem;
+                    border: 1px solid map-get($map: $colors, $key: cinzaDescD);
+                    resize: vertical;
+                    height: 7.8125rem;
+                }
+                input::placeholder{
+                    @include text_style(map-get($map: $colors, $key: cinzaDescD), .75rem, 400);
+                }
+                option{
+                    padding: .5rem;
+                    appearance: none;
+                }
+                select{
+                    padding: .5rem;
+                    border: 1px solid map-get($map: $colors, $key: cinzaDescD);
+                    border-radius: 0.3125rem;
+                }
+                input:focus, select:focus, textarea:focus{
+                    outline: none;
+                }
+            }
+
+            .submit_container{
+                align-self: flex-end;
+
+                button{
+                    border: none;
+                    border-radius: .8rem;
+                    padding: .6rem 1rem;
+                    @include text_style(map-get($map: $colors, $key: branco), 1rem, 700);
+                    background-color: map-get($map: $colors, $key: azulEscuro);
+                    text-transform: uppercase;
+                    cursor: pointer;
+                }
+            }
+        }
+
+    }
+}

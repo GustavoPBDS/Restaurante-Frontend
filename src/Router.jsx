@@ -18,6 +18,9 @@ import Profile from "./pages/Profile/Profile";
 import Config from "./pages/Profile/Config";
 import Order from "./pages/Orders/Order";
 import Orders from "./pages/Orders/Orders";
+import NotFound from './pages/Errors/NotFound'
+import Users from "./pages/Admin/Users";
+import Creating from "./pages/Product/Creating";
 
 const Router = ({ globalError }) => {
     const location = useLocation(),
@@ -34,24 +37,27 @@ const Router = ({ globalError }) => {
             <Routes>
                 <Route path='/' element={isAuth ? <Home/> : <LP/>}/>
 
+                <Route path='/register' element={<Register/>} />
+                <Route path='/login' element={<Login/>}/>
+
                 <Route path="/home" element={isAuth ? <Home/> : <LP/>}/>
                 <Route path="/search" element={isAuth ? <Search/> : <LP/>}/>
+
+                <Route path="/config/:uid?" element={isAuth ? <Config/> : <LP/>}/>
+                <Route path="/user/:uid" element={isAuth ? <Profile/> : <LP/>}/>
+
+                <Route path='/contact' element={<Contact/>} />
+                
+                <Route path="/products/:category" element={isAuth ? <ProductsCategory/> : <LP/>}/>
+                <Route path="/product/:pid" element={isAuth ? <Product/> : <LP/>}/>
                 
                 <Route path="/orders" element={isAuth ? <Orders/> : <LP/>}/>
                 <Route path="/order/:oid" element={isAuth ? <Order/> : <LP/>}/>
 
-                <Route path="/users" element={isAuth ? <Home/> : <LP/>}/>
+                <Route path="/users" element={isAuth ? <Users/> : <LP/>}/>
+                <Route path="/product/create/:pid?" element={isAuth ? <Creating/> : <LP/>}/>
 
-                <Route path="/products/:category" element={isAuth ? <ProductsCategory/> : <LP/>}/>
-                <Route path="/product/:pid" element={isAuth ? <Product/> : <LP/>}/>
-
-                <Route path='/register' element={<Register/>} />
-                <Route path='/login' element={<Login/>}/>
-
-                <Route path="/user/:uid" element={isAuth ? <Profile/> : <LP/>}/>
-                <Route path="/config" element={isAuth ? <Config/> : <LP/>}/>
-
-                <Route path='/contact' element={<Contact/>} />
+                <Route path="*" element={<NotFound/>}/>
             </Routes>
             {globalError && <Message message={globalError} type='error'/>}
         </>

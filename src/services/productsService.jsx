@@ -64,4 +64,38 @@ export const productsService = new class{
             throw err.response.data
         }
     }
+
+    async createProduct(token, body){
+        const url = `product`,
+            config = makeAxiosConfig('POST', url, token, body)
+        
+        try {
+            const res = await axios(config)
+            return res.data.product
+        } catch (err) {
+            throw err.response.data
+        }
+    }
+    async updateProduct(token, body, pid){
+        const url = `product/${pid}`,
+            config = makeAxiosConfig('PUT', url, token, body)
+        
+        try {
+            const res = await axios(config)
+            return res.data.product
+        } catch (err) {
+            throw err.response.data
+        }
+    }
+    async deleteProduct(token, pid){
+        const url = `product/${pid}`,
+            config = makeAxiosConfig('DELETE', url, token)
+        
+        try {
+            const res = await axios(config)
+            return res.data.product
+        } catch (err) {
+            throw err.response.data
+        }
+    }
 }

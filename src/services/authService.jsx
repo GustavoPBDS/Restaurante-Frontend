@@ -52,7 +52,7 @@ export const authService = new class{
             config = makeAxiosConfig('PUT', url, token, body)
         try {
             const res = await axios(config)
-            setToken(res.data.token)
+            if (setToken) setToken(res.data.token)
             return res.data.token
         } catch (err) {
             throw err.response.data
@@ -78,4 +78,15 @@ export const authService = new class{
             throw err.response.data
         }
     }
+    async getUsers(token){
+        const url = 'users',
+            config = makeAxiosConfig('GET', url, token)
+        try {
+            const res = await axios(config)
+            return res.data.users
+        } catch (err) {
+            throw err.response.data
+        }
+    }
+
 }

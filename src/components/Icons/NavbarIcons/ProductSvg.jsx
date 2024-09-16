@@ -2,7 +2,7 @@ import React from 'react'
 
 const ProductSvg = () => {
     return (
-        <svg width="64px" height="64px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#ffffff"><g id="SVGRepo_bgCarrier" strokedWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path fill="none" d="M0 0h24v24H0z"></path> <path fillRule="nonzero" d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm1.334-8a1.5 1.5 0 0 0 0-3H10.5v3h2.834zm0-5a3.5 3.5 0 0 1 0 7H10.5v3h-2V7h4.834z"></path> </g> </g></svg>
+        <svg width="64px" height="64px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" fill="#ffffff"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <defs> </defs> <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd"> <g id="Dribbble-Light-Preview" transform="translate(-420.000000, -7559.000000)" fill="#ffffff"> <g id="icons" transform="translate(56.000000, 160.000000)"> <path d="M376.5,7408 C376.5,7408.69 375.957,7409 375.289,7409 L373,7409 L373,7407 L375.289,7407 C375.957,7407 376.5,7407.31 376.5,7408 M375.27,7411 L373,7411 L373,7413 L371,7413 L371,7405 L375.27,7405 C376.777,7405 378,7406.473 378,7408 C378,7409.488 376.777,7410 375.27,7411 M374,7399 C368.477,7399 364,7403.477 364,7409 C364,7414.523 368.477,7419 374,7419 C379.523,7419 384,7414.523 384,7409 C384,7403.477 379.523,7399 374,7399" id="product_hunt-[#ffffff135]"> </path> </g> </g> </g> </g></svg>
     )
 }
 

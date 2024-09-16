@@ -9,14 +9,22 @@ import useErrors from '../../hooks/useErrors'
 import Message from '../../components/Message/Message'
 import { useAuth } from '../../hooks/useAuth'
 import { useCookiesCustom } from '../../hooks/useCookiesCustom'
+import { useNavigate, useParams } from 'react-router-dom'
+import NotAllowed from '../Errors/NotAllowed'
+import { useAdmin } from '../../hooks/useAdmin'
 
 const Config = () => {
     const {user, sucess} = useSelector(state=>state.auth),
         {cookie:token} = useCookiesCustom('user'),
         {dispatchGlobalError} = useErrors(),
-        {updateUser, deleteUser} = useAuth()
+        {updateUser, deleteUser, getUser} = useAuth(),
+        {editAnotherUser, deleteAnotherUser} = useAdmin(),
+        navigate = useNavigate(),
+        {uid} = useParams()
 
-    const [verifyDeleteAcc, setVerifyDeleteAcc] = useState(false),
+    const 
+        [User, setUser] = useState(),
+        [verifyDeleteAcc, setVerifyDeleteAcc] = useState(false),
         [imageExist, setImageExist] = useState(true),
 
         [editUsername, setEditUsername] = useState(false),
@@ -44,7 +52,10 @@ const Config = () => {
         body.append('user', JSON.stringify(user))
         if (profileImage) body.append('image', profileImage)
 
-        if (body.has('user') || body.has('image')) return updateUser(body, token)
+        if (body.has('user') || body.has('image')) {
+            if (uid) editAnotherUser(body, token, uid).then(res=>{navigate('/users')})
+            else updateUser(body, token)
+        }
     },
     resetEdits = ()=>{
         setEditEmail(false)
@@ -54,7 +65,8 @@ const Config = () => {
         setEmail('')
     },
     deleteAccount = ()=>{
-        deleteUser(token)
+        if (uid) deleteAnotherUser(token, uid).then(res=>{navigate('/users')})
+        else deleteUser(token)
     },
     handleImage = (e)=>{
         const files = e.target.files
@@ -76,15 +88,23 @@ const Config = () => {
         if(sucess) setMessage('Alterações salvas !')
     },[sucess])
     useEffect(()=>{
-        if (user) setDraftImage(user.profileImg)
-    },[user])
+        if (User) setDraftImage(User.profileImg)
+    },[User])
     useEffect(()=>{
         if(!editUsername) setUsername('')
     }, [editUsername])
     useEffect(()=>{
         if(!editEmail) setEmail('')
     }, [editEmail])
+    useEffect(()=>{
+        if (uid) {
+            getUser(uid).then(res=>setUser(res))
+        }else{
+            setUser(user)
+        }
+    },[uid])
 
+    if(uid && !user?.admin) return <NotAllowed/>
     return (
         <div className={styles.container}>
             <div className={styles.content}>
@@ -104,9 +124,9 @@ const Config = () => {
                             <div className={styles.infos}>
                                 <label htmlFor="username">Username: </label>
                                 {editUsername ? (
-                                    <input id='username' value={username} onChange={e=>setUsername(e.target.value)} placeholder={user?.name} autoFocus/>
+                                    <input id='username' value={username} onChange={e=>setUsername(e.target.value)} placeholder={User?.name} autoFocus/>
                                 ) : (
-                                    <span>{user?.name}</span>
+                                    <span>{User?.name}</span>
                                 )}
                             </div>
                             <span onClick={()=>setEditUsername(!editUsername)}>
@@ -118,9 +138,9 @@ const Config = () => {
                             <div className={styles.infos}>
                                 <label htmlFor="email">Email Address: </label>
                                 {editEmail ? (
-                                    <input id='email' value={email} onChange={e=>setEmail(e.target.value)} placeholder={user?.email} autoFocus/>
+                                    <input id='email' value={email} onChange={e=>setEmail(e.target.value)} placeholder={User?.email} autoFocus/>
                                 ) : (
-                                    <span>{user?.email}</span>
+                                    <span>{User?.email}</span>
                                 )}
                             </div>
                             <span onClick={()=>setEditEmail(!editEmail)}>
